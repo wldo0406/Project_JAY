@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <group>
+    <item
+        android:id="@+id/month_button"
+        android:title="Month"
+        android:icon="@drawable/ic_more_vert_black_24dp"
+        app:showAsAction = "never"
+        />
+
+    <item
+        android:id="@+id/week_button"
+        android:title="Week"
+        android:icon="@drawable/ic_more_vert_black_24dp"
+        app:showAsAction = "never"
+        />
+
+    <item
+        android:id="@+id/day_button"
+        android:title="Day"
+        android:icon="@drawable/ic_more_vert_black_24dp"
+        app:showAsAction = "never"
+        />
+    </group>
+    <item
+        android:title="plus"
+        android:icon="@drawable/ic_add_black_24dp"
+        android:id="@+id/additem"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:icon="@drawable/ic_remove_black_24dp"
+        android:title="delete"
+        android:id="@+id/deleteitem"
+        app:showAsAction="ifRoom"
+        />
+
+</menu>
