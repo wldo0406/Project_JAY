@@ -69,7 +69,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
     // Usually involves inflating a layout from XML and returning the holder
     @Override
-    public ContactsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -101,12 +101,4 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         return mContacts.size();
     }
 
-<<<<<<< HEAD
-=======
-    public void removeItem(int p){
-        mContacts.remove(p);
-        notifyItemRemoved(p);
-
-    }
->>>>>>> 3220a65e46e9ec6795d94cdc020c7af747e7c56b
 }

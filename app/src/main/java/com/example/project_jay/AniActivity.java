@@ -1,6 +1,7 @@
 package com.example.project_jay;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -17,6 +18,8 @@ public class AniActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ani);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
 
         mFrame = (FrameLayout)findViewById(R.id.activity_ani);
