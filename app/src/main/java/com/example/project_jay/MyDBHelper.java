@@ -13,7 +13,7 @@ public class MyDBHelper extends SQLiteOpenHelper{
 
     private static MyDBHelper helper;
 
-    public static MyDBHelper getInstance(Context context) {
+    static public MyDBHelper getInstance(Context context) {
         if (helper == null)
             helper = new MyDBHelper(context);
         return helper;

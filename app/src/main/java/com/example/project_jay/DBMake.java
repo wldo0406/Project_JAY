@@ -23,8 +23,8 @@ import java.util.Locale;
 public class DBMake extends AppCompatActivity {
     final static String TAG="SQLITEDBTEST";
     private MyDBHelper helper;
-    public ContactsAdapter adapter;
-    ArrayList<Contact> contacts;
+    private ContactsAdapter adapter1;
+    ArrayList<Contact> contacts1;
 
 
 
@@ -35,55 +35,62 @@ public class DBMake extends AppCompatActivity {
 
         RecyclerView rvContacts = (RecyclerView) findViewById(R.id.rvContacts);
 
-        helper = new MyDBHelper(this);
-        contacts = Contact.createContactsList(0);
-        adapter = new ContactsAdapter(this, contacts);
-        rvContacts.setAdapter(adapter);
+        helper =  MyDBHelper.getInstance(this);
+        contacts1 = Contact.createContactsList1(0);
+        adapter1 = new ContactsAdapter(this, contacts1);
+        rvContacts.setAdapter(adapter1);
 
         StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rvContacts.setLayoutManager(gridLayoutManager);
         //rvContacts.setHasFixedSize(true);
 
 
-        Button button1 = (Button)findViewById(R.id.button1);
-        button1.setOnClickListener(new View.OnClickListener(){
+        Button button1 = (Button) findViewById(R.id.button1);
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText caltext = (EditText)findViewById(R.id.caltext);
-                EditText monthtext = (EditText)findViewById(R.id.monthtext);
-                EditText daytext = (EditText)findViewById(R.id.daytext);
-                try{
-                    String sql = String.format (
-                            "INSERT INTO schedulew (_id,title, month, day)\n"+
+                EditText caltext = (EditText) findViewById(R.id.caltext);
+                EditText monthtext = (EditText) findViewById(R.id.monthtext);
+                EditText daytext = (EditText) findViewById(R.id.daytext);
+                try {
+                    String sql = String.format(
+                            "INSERT INTO schedulew (_id,title, month, day)\n" +
                                     "VALUES (NULL,'%s', '%s', '%s')",
-                            caltext.getText(),monthtext.getText(),daytext.getText());
+                            caltext.getText(), monthtext.getText(), daytext.getText());
                     helper.getWritableDatabase().execSQL(sql);
-                }catch (SQLException e){
+                } catch (SQLException e) {
                     Log.e(TAG, "ERROR");
                 }
             }
         });
 
 
-        Button button2 = (Button)findViewById(R.id.button2);
+        Button button2 = (Button) findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //TextView result = (TextView)findViewById(R.id.result);
                 String sql = "Select * FROM schedulew";
-                Cursor cursor = helper.getReadableDatabase().rawQuery(sql,null);
+                Cursor cursor = helper.getReadableDatabase().rawQuery(sql, null);
                 StringBuffer buffer = new StringBuffer();
                 while (cursor.moveToNext()) {
-                    buffer.append(cursor.getString(2)+"/");
-                    buffer.append(cursor.getString(3)+":");
-                    buffer.append(cursor.getString(1)+"\n");
-                    String str = cursor.getString(2)+"/"+cursor.getString(3)+":"+cursor.getString(1);
-                    contacts.add(0, new Contact(str,true));
-                    adapter.notifyItemInserted(0);
+                    buffer.append(cursor.getString(2) + "/");
+                    buffer.append(cursor.getString(3) + ":");
+                    buffer.append(cursor.getString(1) + "\n");
+                    String str = cursor.getString(2) + "/" + cursor.getString(3) + ":" + cursor.getString(1);
+                    contacts1.add(0, new Contact(str, true));
+                    adapter1.notifyItemInserted(0);
                 }
                 //result.setText(buffer);
 
 
+            }
+        });
+
+        Button button4 = (Button)findViewById(R.id.button4);
+        button4.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                //삭제 다이얼로그받기
             }
         });
     }
