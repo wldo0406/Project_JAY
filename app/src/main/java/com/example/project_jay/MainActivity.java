@@ -57,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent1);
                 break;
             case R.id.deleteitem:
-
+                Intent intent2 = new Intent(this, DailyActivity.class);
+                startActivity(intent2);
                 break;
 
         }
