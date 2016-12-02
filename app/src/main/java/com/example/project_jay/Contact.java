@@ -37,6 +37,45 @@ public class Contact {
         return contacts;
     }
 
+    public static ArrayList<Contact> createContactsList1(int numContacts) {
+        ArrayList<Contact> contacts1 = new ArrayList<Contact>();
+
+        for (int i = 1; i <= numContacts; i++) {
+            contacts1.add(new Contact("Person " + ++lastContactId, i <= numContacts / 2));
+        }
+
+        return contacts1;
+    }
+
+    public static ArrayList<Contact> createContactsList2(int numContacts) {
+        ArrayList<Contact> contacts2 = new ArrayList<Contact>();
+
+        for (int i = 1; i <= numContacts; i++) {
+            contacts2.add(new Contact("Person " + ++lastContactId, i <= numContacts / 2));
+        }
+
+        return contacts2;
+    }
+
+    public static ArrayList<Contact> createContactsList3(int numContacts) {
+        ArrayList<Contact> contacts3 = new ArrayList<Contact>();
+
+        for (int i = 1; i <= numContacts; i++) {
+            contacts3.add(new Contact("Person " + ++lastContactId, i <= numContacts / 2));
+        }
+
+        return contacts3;
+    }
+    public static ArrayList<Contact> createContactsList4(int numContacts) {
+        ArrayList<Contact> contacts4 = new ArrayList<Contact>();
+
+        for (int i = 1; i <= numContacts; i++) {
+            contacts4.add(new Contact("Person " + ++lastContactId, i <= numContacts / 2));
+        }
+
+        return contacts4;
+    }
+
 
 
 }

@@ -2,6 +2,9 @@ package com.example.project_jay;
 
 import android.database.Cursor;
 import android.database.SQLException;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -23,8 +26,8 @@ import java.util.Locale;
 public class DBMake extends AppCompatActivity {
     final static String TAG="SQLITEDBTEST";
     private MyDBHelper helper;
-    public ContactsAdapter adapter;
-    ArrayList<Contact> contacts;
+    public ContactsAdapter adapter1;
+    ArrayList<Contact> contacts1;
 
 
 
@@ -32,13 +35,23 @@ public class DBMake extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dbmake);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar !=null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            Drawable drawable = getDrawable(R.drawable.ic_chevron_left_black_24dp);
+            if(drawable !=null){
+                drawable.setTint(Color.BLACK);
+                actionBar.setHomeAsUpIndicator(drawable);
+            }
+        }
 
         RecyclerView rvContacts = (RecyclerView) findViewById(R.id.rvContacts);
 
-        helper = new MyDBHelper(this);
-        contacts = Contact.createContactsList(0);
-        adapter = new ContactsAdapter(this, contacts);
-        rvContacts.setAdapter(adapter);
+        helper =  MyDBHelper.getInstance(this);
+        contacts1 = Contact.createContactsList(0);
+        adapter1= new ContactsAdapter(this, contacts1);
+        rvContacts.setAdapter(adapter1);
+        setTitle("Add Calendar");
 
         StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rvContacts.setLayoutManager(gridLayoutManager);
@@ -78,8 +91,8 @@ public class DBMake extends AppCompatActivity {
                     buffer.append(cursor.getString(3)+":");
                     buffer.append(cursor.getString(1)+"\n");
                     String str = cursor.getString(2)+"/"+cursor.getString(3)+":"+cursor.getString(1);
-                    contacts.add(0, new Contact(str,true));
-                    adapter.notifyItemInserted(0);
+                    contacts1.add(0, new Contact(str,true));
+                    adapter1.notifyItemInserted(0);
                 }
                 //result.setText(buffer);
 

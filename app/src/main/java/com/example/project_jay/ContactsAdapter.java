@@ -38,17 +38,17 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         public ViewHolder(Context context, View itemView, ContactsAdapter adapter) {
             super(itemView);
             nameTextView = (TextView) itemView.findViewById(R.id.contact_name);
-            messageButton = (Button) itemView.findViewById(R.id.message_button);
+          //  messageButton = (Button) itemView.findViewById(R.id.message_button);
             mAdapter = adapter;
             this.context = context;
-            messageButton.setOnClickListener(this);
+          //  messageButton.setOnClickListener(this);
         }
 
 
         @Override
         public void onClick(View view) {
             int position = getLayoutPosition(); // gets item position
-            mAdapter.removeItem(position);
+           // mAdapter.removeItem(position);
             // We can access the data within the views
             Toast.makeText(context, nameTextView.getText() + Integer.toString(position), Toast.LENGTH_SHORT).show();
         }
@@ -94,8 +94,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         // Set item views based on your views and data model
         TextView textView = viewHolder.nameTextView;
         textView.setText(contact.getName());
-        Button button = viewHolder.messageButton;
-        button.setText("삭제");
+
 
     }
 
@@ -105,15 +104,4 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         return mContacts.size();
     }
 
-    public void removeItem(int p){
-        mContacts.remove(p);
-        notifyItemRemoved(p);
-
-
-
-        String sql = "Select * FROM schedulew";
-        helper.getReadableDatabase().rawQuery(sql,null);
-
-
-    }
 }
