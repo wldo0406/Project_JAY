@@ -1,29 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_daily"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:orientation="vertical"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.project_jay.DBMake">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="일정 내용 : "/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/caltext"
-            />
-    </LinearLayout>
+    tools:context="com.example.project_jay.DailyActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,7 +23,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/monthtext"
+            android:id="@+id/dmonth"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -47,20 +33,14 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/daytext"
+            android:id="@+id/dday"
             />
     </LinearLayout>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="일정추가"
-        android:id="@+id/button1"
-        />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="모든 일정 보기"
-        android:id="@+id/button2"
+        android:text="검색하기"
+        android:id="@+id/search"
         />
     <LinearLayout
         android:layout_width="wrap_content"
@@ -70,21 +50,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/result"/>
+            android:id="@+id/dresult"/>
     </LinearLayout>
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/button4"
+        android:text="편집하기"
+        android:id="@+id/dedit"
+        android:layout_gravity="right"
         />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvContacts"
-        android:scrollbars="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"/>
 
 </LinearLayout>

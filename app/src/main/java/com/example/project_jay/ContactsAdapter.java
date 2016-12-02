@@ -21,9 +21,6 @@ import java.util.List;
 // Note that we specify the custom ViewHolder which gives us access to our views
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
 
-    private MyDBHelper helper;
-    ArrayList<Contact> contacts;
-
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -104,4 +101,12 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         return mContacts.size();
     }
 
+<<<<<<< HEAD
+=======
+    public void removeItem(int p){
+        mContacts.remove(p);
+        notifyItemRemoved(p);
+
+    }
+>>>>>>> 3220a65e46e9ec6795d94cdc020c7af747e7c56b
 }
