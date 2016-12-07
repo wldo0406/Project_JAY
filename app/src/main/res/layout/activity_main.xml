@@ -10,12 +10,17 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:id="@+id/activity_main"
     tools:context="com.example.project_jay.MainActivity">
+
     <CalendarView
         android:layout_width="match_parent"
         android:layout_height="0px"
         android:id="@+id/calendarmonth"
         android:layout_weight="1"
         />
+
+
+
+
     <CalendarView
         android:layout_width="match_parent"
         android:layout_height="1px"
@@ -27,5 +32,7 @@
         android:weekSeparatorLineColor="#00ff00"
         android:showWeekNumber="false"
         />
+
+
 
 </LinearLayout>

@@ -16,21 +16,32 @@ import java.util.ArrayList;
 /**
  * Created by 전지연 on 2016-11-23.
  */
-public class Weekfragment extends Fragment {
+public class WeekFragment extends Fragment {
 
     private ContactsAdapter adapter3;
     ArrayList<Contact> contacts3;
+    int selecteditem = 0;
+    int mCurCheckPosition = -1;
 
-    public Weekfragment(){
+    public interface OnNameSelectedListener{
+        public void onNameSelected(int i);
+    }
+
+    public WeekFragment(){
 
     }
 
+
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
+
         final View view2 = inflater.inflate(R.layout.week_fragment,container,false);
         getActivity().setTitle("Weekly Calendar");
 
-        Button button51 = (Button)view2.findViewById(R.id.button51);
+
+       // Button button5 = (Button)view2.findViewById(R.id.button5);
+         Button button51 = (Button)view2.findViewById(R.id.button51);
         Button button52 = (Button)view2.findViewById(R.id.button52);
         Button button53 = (Button)view2.findViewById(R.id.button53);
         Button button54 = (Button)view2.findViewById(R.id.button54);
@@ -52,7 +63,7 @@ public class Weekfragment extends Fragment {
                 // TextView resultw = (TextView)view2.findViewById(R.id.resultw);
                 EditText selectw = (EditText) view2.findViewById(R.id.selectw);
 
-                String sql4 = String.format("SELECT * FROM schedulew WHERE month IN(%s) AND day IN('1','2','3','4','5','6','7')",selectw.getText());
+                String sql4 = String.format("SELECT * FROM schedulev WHERE month1 IN(%s) AND day1 IN('1','2','3','4','5','6','7')",selectw.getText());
                 Cursor cursor4 = MyDBHelper.getInstance(getActivity()).getReadableDatabase().rawQuery(sql4,null);
                 StringBuffer buffer = new StringBuffer();
 
@@ -60,7 +71,13 @@ public class Weekfragment extends Fragment {
                     buffer.append(cursor4.getString(2)+"/");
                     buffer.append(cursor4.getString(3)+":");
                     buffer.append(cursor4.getString(1)+"\n");
-                    String str4 = cursor4.getString(2) + "/" + cursor4.getString(3) + ":" + cursor4.getString(1);
+                    buffer.append(cursor4.getString(4)+"\t");
+                    buffer.append(cursor4.getString(5)+"\t");
+                    buffer.append(cursor4.getString(6)+"\t");
+                    buffer.append(cursor4.getString(7)+"\t");
+
+                    String str4 = cursor4.getString(2) + "/" + cursor4.getString(3) + ":" + cursor4.getString(1)
+                            +"-시간:" +cursor4.getString(4)+":"+cursor4.getString(5)+"~"+cursor4.getString(6)+":"+cursor4.getString(7);
                     contacts3.add(0, new Contact(str4, true));
                     adapter3.notifyItemInserted(0);
                 }
@@ -74,7 +91,7 @@ public class Weekfragment extends Fragment {
                 // TextView resultw = (TextView)view2.findViewById(R.id.resultw);
                 EditText selectw = (EditText) view2.findViewById(R.id.selectw);
 
-                String sql4 = String.format("SELECT * FROM schedulew WHERE month IN(%s) AND day IN('8','9','10','11','12','13','14')",selectw.getText());
+                String sql4 = String.format("SELECT * FROM schedulev WHERE month1 IN(%s) AND day1 IN('8','9','10','11','12','13','14')",selectw.getText());
                 Cursor cursor4 = MyDBHelper.getInstance(getActivity()).getReadableDatabase().rawQuery(sql4,null);
                 StringBuffer buffer = new StringBuffer();
 
@@ -82,7 +99,13 @@ public class Weekfragment extends Fragment {
                     buffer.append(cursor4.getString(2)+"/");
                     buffer.append(cursor4.getString(3)+":");
                     buffer.append(cursor4.getString(1)+"\n");
-                    String str4 = cursor4.getString(2) + "/" + cursor4.getString(3) + ":" + cursor4.getString(1);
+                    buffer.append(cursor4.getString(4)+"\t");
+                    buffer.append(cursor4.getString(5)+"\t");
+                    buffer.append(cursor4.getString(6)+"\t");
+                    buffer.append(cursor4.getString(7)+"\t");
+
+                    String str4 = cursor4.getString(2) + "/" + cursor4.getString(3) + ":" + cursor4.getString(1)
+                            +"-시간:" +cursor4.getString(4)+":"+cursor4.getString(5)+"~"+cursor4.getString(6)+":"+cursor4.getString(7);
                     contacts3.add(0, new Contact(str4, true));
                     adapter3.notifyItemInserted(0);
                 }
@@ -96,7 +119,7 @@ public class Weekfragment extends Fragment {
                 // TextView resultw = (TextView)view2.findViewById(R.id.resultw);
                 EditText selectw = (EditText) view2.findViewById(R.id.selectw);
 
-                String sql4 = String.format("SELECT * FROM schedulew WHERE month IN(%s) AND day IN('15','16','17','18','19','20','21')",selectw.getText());
+                String sql4 = String.format("SELECT * FROM schedulev WHERE month1 IN(%s) AND day1 IN('15','16','17','18','19','20','21')",selectw.getText());
                 Cursor cursor4 = MyDBHelper.getInstance(getActivity()).getReadableDatabase().rawQuery(sql4,null);
                 StringBuffer buffer = new StringBuffer();
 
@@ -104,7 +127,12 @@ public class Weekfragment extends Fragment {
                     buffer.append(cursor4.getString(2)+"/");
                     buffer.append(cursor4.getString(3)+":");
                     buffer.append(cursor4.getString(1)+"\n");
-                    String str4 = cursor4.getString(2) + "/" + cursor4.getString(3) + ":" + cursor4.getString(1);
+                    buffer.append(cursor4.getString(4)+"\t");
+                    buffer.append(cursor4.getString(5)+"\t");
+                    buffer.append(cursor4.getString(6)+"\t");
+                    buffer.append(cursor4.getString(7)+"\t");
+                    String str4 = cursor4.getString(2) + "/" + cursor4.getString(3) + ":" + cursor4.getString(1)
+                            +"-시간:" +cursor4.getString(4)+":"+cursor4.getString(5)+"~"+cursor4.getString(6)+":"+cursor4.getString(7);
                     contacts3.add(0, new Contact(str4, true));
                     adapter3.notifyItemInserted(0);
 
@@ -119,7 +147,7 @@ public class Weekfragment extends Fragment {
                 // TextView resultw = (TextView)view2.findViewById(R.id.resultw);
                 EditText selectw = (EditText) view2.findViewById(R.id.selectw);
 
-                String sql4 = String.format("SELECT * FROM schedulew WHERE month IN(%s) AND day IN('22','23','24','25','26','27','28')",selectw.getText());
+                String sql4 = String.format("SELECT * FROM schedulev WHERE month1 IN(%s) AND day1 IN('22','23','24','25','26','27','28')",selectw.getText());
                 Cursor cursor4 = MyDBHelper.getInstance(getActivity()).getReadableDatabase().rawQuery(sql4,null);
                 StringBuffer buffer = new StringBuffer();
 
@@ -127,7 +155,12 @@ public class Weekfragment extends Fragment {
                     buffer.append(cursor4.getString(2)+"/");
                     buffer.append(cursor4.getString(3)+":");
                     buffer.append(cursor4.getString(1)+"\n");
-                    String str4 = cursor4.getString(2) + "/" + cursor4.getString(3) + ":" + cursor4.getString(1);
+                    buffer.append(cursor4.getString(4)+"\t");
+                    buffer.append(cursor4.getString(5)+"\t");
+                    buffer.append(cursor4.getString(6)+"\t");
+                    buffer.append(cursor4.getString(7)+"\t");
+                    String str4 = cursor4.getString(2) + "/" + cursor4.getString(3) + ":" + cursor4.getString(1)
+                            +"-시간:" +cursor4.getString(4)+":"+cursor4.getString(5)+"~"+cursor4.getString(6)+":"+cursor4.getString(7);
                     contacts3.add(0, new Contact(str4, true));
                     adapter3.notifyItemInserted(0);
                 }
@@ -141,7 +174,7 @@ public class Weekfragment extends Fragment {
                 // TextView resultw = (TextView)view2.findViewById(R.id.resultw);
                 EditText selectw = (EditText) view2.findViewById(R.id.selectw);
 
-                String sql4 = String.format("SELECT * FROM schedulew WHERE month IN(%s) AND day IN('29','30','31')",selectw.getText());
+                String sql4 = String.format("SELECT * FROM schedulev WHERE month1 IN(%s) AND day1 IN('29','30','31')",selectw.getText());
                 Cursor cursor4 = MyDBHelper.getInstance(getActivity()).getReadableDatabase().rawQuery(sql4,null);
                 StringBuffer buffer = new StringBuffer();
 
@@ -149,7 +182,12 @@ public class Weekfragment extends Fragment {
                     buffer.append(cursor4.getString(2)+"/");
                     buffer.append(cursor4.getString(3)+":");
                     buffer.append(cursor4.getString(1)+"\n");
-                    String str4 = cursor4.getString(2) + "/" + cursor4.getString(3) + ":" + cursor4.getString(1);
+                    buffer.append(cursor4.getString(4)+"\t");
+                    buffer.append(cursor4.getString(5)+"\t");
+                    buffer.append(cursor4.getString(6)+"\t");
+                    buffer.append(cursor4.getString(7)+"\t");
+                    String str4 = cursor4.getString(2) + "/" + cursor4.getString(3) + ":" + cursor4.getString(1)
+                            +"-시간:" +cursor4.getString(4)+":"+cursor4.getString(5)+"~"+cursor4.getString(6)+":"+cursor4.getString(7);
                     contacts3.add(0, new Contact(str4, true));
                     adapter3.notifyItemInserted(0);
                 }

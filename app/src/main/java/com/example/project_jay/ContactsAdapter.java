@@ -1,7 +1,6 @@
 package com.example.project_jay;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,13 +27,14 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         public TextView nameTextView;
         public Button messageButton;
         public ContactsAdapter mAdapter;
+        public Button editButton;
         private Context context;
 
 
         public ViewHolder(Context context, View itemView, ContactsAdapter adapter) {
             super(itemView);
-            nameTextView = (TextView) itemView.findViewById(R.id.contact_name);
-          //  messageButton = (Button) itemView.findViewById(R.id.message_button);
+          nameTextView = (TextView) itemView.findViewById(R.id.contact_name);
+         //   messageButton = (Button) itemView.findViewById(R.id.message_button);
             mAdapter = adapter;
             this.context = context;
           //  messageButton.setOnClickListener(this);
@@ -45,7 +44,8 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         @Override
         public void onClick(View view) {
             int position = getLayoutPosition(); // gets item position
-           // mAdapter.removeItem(position);
+
+
             // We can access the data within the views
             Toast.makeText(context, nameTextView.getText() + Integer.toString(position), Toast.LENGTH_SHORT).show();
         }
@@ -83,7 +83,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
     // Involves populating data into the item through holder
     @Override
-    public void onBindViewHolder(ContactsAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(final ViewHolder viewHolder, int position) {
         // Get the data model based on position
         Contact contact = mContacts.get(position);
         //Contact adapter = mContacts.remove(position);
@@ -100,5 +100,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     public int getItemCount() {
         return mContacts.size();
     }
+
+
 
 }

@@ -2,10 +2,6 @@ package com.example.project_jay;
 
 import java.util.ArrayList;
 
-/**
- * Created by jyheo on 2016-07-22.
- * source: https://guides.codepath.com/android/using-the-recyclerview
- */
 
 public class Contact {
     private String mName;
@@ -56,18 +52,15 @@ public class Contact {
 
         return contacts3;
     }
-
     public static ArrayList<Contact> createContactsList4(int numContacts) {
-        ArrayList<Contact> contacts1 = new ArrayList<Contact>();
+        ArrayList<Contact> contacts4 = new ArrayList<Contact>();
 
         for (int i = 1; i <= numContacts; i++) {
-            contacts1.add(new Contact("Person " + ++lastContactId, i <= numContacts / 2));
+            contacts4.add(new Contact("Person " + ++lastContactId, i <= numContacts / 2));
         }
 
-        return contacts1;
+        return contacts4;
     }
-
-
 
 
 

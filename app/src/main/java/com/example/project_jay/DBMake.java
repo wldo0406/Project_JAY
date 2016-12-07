@@ -4,36 +4,27 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 public class DBMake extends AppCompatActivity {
     final static String TAG="SQLITEDBTEST";
     private MyDBHelper helper;
-    public ContactsAdapter adapter1;
-
+    private ContactsAdapter adapter1;
     ArrayList<Contact> contacts1;
 
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dbmake);
         ActionBar actionBar = getSupportActionBar();
@@ -47,102 +38,71 @@ public class DBMake extends AppCompatActivity {
         }
 
         RecyclerView rvContacts = (RecyclerView) findViewById(R.id.rvContacts);
-
         helper =  MyDBHelper.getInstance(this);
-
-        contacts1 = Contact.createContactsList(0);
-        adapter1= new ContactsAdapter(this, contacts1);
-        rvContacts.setAdapter(adapter1);
-
         contacts1 = Contact.createContactsList1(0);
         adapter1 = new ContactsAdapter(this, contacts1);
         rvContacts.setAdapter(adapter1);
+        setTitle("Add Calendar");
 
-
-        StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         rvContacts.setLayoutManager(gridLayoutManager);
-        //rvContacts.setHasFixedSize(true);
 
-
-        Button button1 = (Button) findViewById(R.id.button1);
-        button1.setOnClickListener(new View.OnClickListener() {
+        Button button1 = (Button)findViewById(R.id.button1);
+        button1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                EditText caltext = (EditText) findViewById(R.id.caltext);
-                EditText monthtext = (EditText) findViewById(R.id.monthtext);
-                EditText daytext = (EditText) findViewById(R.id.daytext);
-                try {
-                    String sql = String.format(
-                            "INSERT INTO schedulew (_id,title, month, day)\n" +
-                                    "VALUES (NULL,'%s', '%s', '%s')",
-                            caltext.getText(), monthtext.getText(), daytext.getText());
+                EditText caltext = (EditText)findViewById(R.id.caltext);
+                EditText monthtext = (EditText)findViewById(R.id.monthtext);
+                EditText daytext = (EditText)findViewById(R.id.daytext);
+                EditText sh = (EditText)findViewById(R.id.sh);
+                EditText sm = (EditText)findViewById(R.id.sm);
+                EditText fh = (EditText)findViewById(R.id.fh);
+                EditText fm = (EditText)findViewById(R.id.fm);
+
+                try{
+                    String sql = String.format (
+                            "INSERT INTO schedulev(_id, title1, month1, day1, starth1, startm1, finishh1, finishm1)\n"+
+                                    "VALUES (NULL,'%s', '%s', '%s','%s', '%s', '%s', '%s')",
+                            caltext.getText(),monthtext.getText(),daytext.getText(),sh.getText(),sm.getText(),fh.getText(),fm.getText());
                     helper.getWritableDatabase().execSQL(sql);
-                } catch (SQLException e) {
+                }catch (SQLException e){
                     Log.e(TAG, "ERROR");
                 }
             }
         });
 
-
-        Button button2 = (Button) findViewById(R.id.button2);
+        Button button2 = (Button)findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TextView result = (TextView)findViewById(R.id.result);
-                String sql = "Select * FROM schedulew";
-                Cursor cursor = helper.getReadableDatabase().rawQuery(sql, null);
+                // TextView result = (TextView)findViewById(R.id.result);
+
+                String sql = "Select * FROM schedulev";
+                Cursor cursor = helper.getReadableDatabase().rawQuery(sql,null);
                 StringBuffer buffer = new StringBuffer();
+
                 while (cursor.moveToNext()) {
+                    buffer.append(cursor.getString(2)+"\t");
+                    buffer.append(cursor.getString(3)+"/");
+                    buffer.append(cursor.getString(1)+"\t");
+                    buffer.append(cursor.getString(4)+"\t");
+                    buffer.append(cursor.getString(5)+"\t");
+                    buffer.append(cursor.getString(6)+"\t");
+                    buffer.append(cursor.getString(7)+"\t");
 
-                    buffer.append(cursor.getString(2)+"/");
-                    buffer.append(cursor.getString(3)+":");
-                    buffer.append(cursor.getString(1)+"\n");
-                    String str = cursor.getString(2)+"/"+cursor.getString(3)+":"+cursor.getString(1);
-                    contacts1.add(0, new Contact(str,true));
 
-
+                    String str = cursor.getString(2) + "/" + cursor.getString(3) + ":" + cursor.getString(1)+"-시간:"
+                            +cursor.getString(4)+":"+cursor.getString(5)+"~"+cursor.getString(6)+":"+cursor.getString(7);
+                    contacts1.add(0, new Contact(str, true));
                     adapter1.notifyItemInserted(0);
                 }
                 //result.setText(buffer);
 
-
             }
         });
 
-        Button button4 = (Button)findViewById(R.id.button4);
-        button4.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                //삭제 다이얼로그받기
-            }
-        });
-    }
-
-
-    private String getDateTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-        Date date = new Date();
-        return dateFormat.format(date);
 
     }
 
-
-
-
-
-
-    /*public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.additem){
-            contacts.add(0, new Contact("JINE",true));
-            adapter.notifyItemInserted(0);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
-    /*
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }*/
 }
+
